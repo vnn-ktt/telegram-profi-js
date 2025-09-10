@@ -9,6 +9,7 @@
     "start:prod": "nodemon distribution/product/index.js",
     "build:dev": "tsc -p tsconfig.dev.json",
     "build:prod": "tsc -p tsconfig.prod.json",
+    "develop":  "yarn run build:dev && yarn run start:dev",
     "watch": "tsc -p tsconfig.dev.json --watch"
   },
   "keywords": [],
