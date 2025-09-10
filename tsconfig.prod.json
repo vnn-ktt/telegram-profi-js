@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./distribution/product",
+    "sourceMap": false, // выключает source maps
+    "removeComments": true, // удаляем комменты
+    "noEmitOnError": true, // нельзя запуститься с ошибками
+    "declarationMap": false // не включает декларации в карты
+  }
+}

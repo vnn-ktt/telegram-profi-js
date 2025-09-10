@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./distribution/development",
+    "sourceMap": true, // включает source maps
+    "inlineSources": true, // включает исходный код в source maps
+    "declarationMap": true, // включает декларации библиотек в карты
+    "removeComments": false, // не удаляем комменты
+    "noEmitOnError": false, // запуск с ошибками
+    "incremental": true, // быстрая компиляция (компиляция только измененных файлов)
+    "tsBuildInfoFile": "./distribution/development/.tsbuildinfo" // информация об инкрементальной компиляции
+  }
+}

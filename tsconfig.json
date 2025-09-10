@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ES2015", // использование import
+    "moduleResolution": "node", // node.js ищет модули в node_modules и поддерживает расширения .ts
+    "esModuleInterop": true, // позволяет импортировать CommonJS модули как ES модули
+    "lib": ["ES2020"], // только стандартные ES2020 функции, без DOM
+    "rootDir": "./source",
+    "strict": true, // noImplicitAny, strictNullChecks, strictFunctionTypes
+    "forceConsistentCasingInFileNames": true, // для кроссплатформенной совместимости (Windows vs Linux)
+    "resolveJsonModule": true, // позволяет импортировать JSON файлы как модули
+    "declaration": true, // генерирует .d.ts файлы (для библиотек)
+    "skipLibCheck": true, // пропускает проверку типов в файлах .d.ts (декларациях)
+  },
+  "include": ["source/**/*"],
+  "exclude": ["node_modules", "distribution"]
+}
