@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 import * as path from 'path';
 import * as fileSystem from "fs";
 
-class EnvironmentManager {
+export default class EnvironmentManager {
     private static _instance: EnvironmentManager;
     private constructor() {
         this.loadEnvironment();
@@ -16,8 +16,12 @@ class EnvironmentManager {
     }
     public loadEnvironment(): void {
         const env = process.env.NODE_ENV || "development";
-        const envPath = path.resolve(__dirname, '..', 'config', `.env.${env}`);
-        const rootEnvPath = path.resolve(__dirname, '..', 'config', `.env.${env}`);
+        const envPath = path.resolve(
+            process.cwd(), 'source', 'config', `.env.${env}`
+        );
+        const rootEnvPath = path.resolve(
+            process.cwd(), 'source', 'config', `.env`
+        );
 
         if (fileSystem.existsSync(envPath)) {
             dotenv.config({path: envPath});
@@ -37,5 +41,3 @@ class EnvironmentManager {
         return value;
     }
 }
-
-export {EnvironmentManager};

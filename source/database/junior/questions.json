@@ -1,0 +1,224 @@
+{
+  "javascript": [
+    {
+      "id": 1,
+      "text": "Что выведет console.log(typeof null)?",
+      "hasOptions": true,
+      "options": [
+        { "id": 1, "text": "null", "isCorrect": false },
+        { "id": 2, "text": "object", "isCorrect": true },
+        { "id": 3, "text": "undefined", "isCorrect": false },
+        { "id": 4, "text": "string", "isCorrect": false }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "Что такое hoisting в JavaScript?",
+      "hasOptions": true,
+      "options": [
+        { "id": 1, "text": "Поднятие переменных и функций в начало области видимости", "isCorrect": true },
+        { "id": 2, "text": "Оптимизация кода движком JavaScript", "isCorrect": false },
+        { "id": 3, "text": "Сборка мусора", "isCorrect": false },
+        { "id": 4, "text": "Асинхронное выполнение кода", "isCorrect": false }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "Какое ключевое слово используется для объявления константы?",
+      "hasOptions": true,
+      "options": [
+        { "id": 1, "text": "let", "isCorrect": false },
+        { "id": 2, "text": "var", "isCorrect": false },
+        { "id": 3, "text": "const", "isCorrect": true },
+        { "id": 4, "text": "static", "isCorrect": false }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "Что такое замыкание (closure) в JavaScript?",
+      "hasOptions": true,
+      "options": [
+        { "id": 1, "text": "Функция вместе с лексическим окружением", "isCorrect": true },
+        { "id": 2, "text": "Способ скрытия переменных", "isCorrect": false },
+        { "id": 3, "text": "Метод оптимизации памяти", "isCorrect": false },
+        { "id": 4, "text": "Тип данных для хранения функций", "isCorrect": false }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "Какой метод массива используется для преобразования элементов?",
+      "hasOptions": true,
+      "options": [
+        { "id": 1, "text": "forEach", "isCorrect": false },
+        { "id": 2, "text": "map", "isCorrect": true },
+        { "id": 3, "text": "filter", "isCorrect": false },
+        { "id": 4, "text": "reduce", "isCorrect": false }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "Что такое Promise в JavaScript?",
+      "hasOptions": true,
+      "options": [
+        { "id": 1, "text": "Объект для работы с асинхронными операциями", "isCorrect": true },
+        { "id": 2, "text": "Способ объявления переменных", "isCorrect": false },
+        { "id": 3, "text": "Метод для создания классов", "isCorrect": false },
+        { "id": 4, "text": "Тип данных для хранения промокодов", "isCorrect": false }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "Как проверить, что переменная является массивом?",
+      "hasOptions": true,
+      "options": [
+        { "id": 1, "text": "typeof variable === 'array'", "isCorrect": false },
+        { "id": 2, "text": "variable.isArray()", "isCorrect": false },
+        { "id": 3, "text": "Array.isArray(variable)", "isCorrect": true },
+        { "id": 4, "text": "variable instanceof Array", "isCorrect": true }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "Что выведет console.log(1 + '2' + 3)?",
+      "hasOptions": true,
+      "options": [
+        { "id": 1, "text": "6", "isCorrect": false },
+        { "id": 2, "text": "123", "isCorrect": true },
+        { "id": 3, "text": "15", "isCorrect": false },
+        { "id": 4, "text": "NaN", "isCorrect": false }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "Какой оператор используется для строгого сравнения?",
+      "hasOptions": true,
+      "options": [
+        { "id": 1, "text": "==", "isCorrect": false },
+        { "id": 2, "text": "===", "isCorrect": true },
+        { "id": 3, "text": "=", "isCorrect": false },
+        { "id": 4, "text": "!==", "isCorrect": false }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "Что такое event bubbling?",
+      "hasOptions": true,
+      "options": [
+        { "id": 1, "text": "Всплытие события от целевого элемента к document", "isCorrect": true },
+        { "id": 2, "text": "Погружение события от document к целевому элементу", "isCorrect": false },
+        { "id": 3, "text": "Создание пользовательских событий", "isCorrect": false },
+        { "id": 4, "text": "Обработка ошибок в событиях", "isCorrect": false }
+      ]
+    },
+    {
+      "id": 11,
+      "text": "Как создать копию объекта без ссылки?",
+      "hasOptions": true,
+      "options": [
+        { "id": 1, "text": "Object.copy(obj)", "isCorrect": false },
+        { "id": 2, "text": "JSON.parse(JSON.stringify(obj))", "isCorrect": true },
+        { "id": 3, "text": "obj.clone()", "isCorrect": false },
+        { "id": 4, "text": "Object.assign(obj)", "isCorrect": false }
+      ]
+    },
+    {
+      "id": 12,
+      "text": "Что такое деструктуризация?",
+      "hasOptions": true,
+      "options": [
+        { "id": 1, "text": "Извлечение значений из объектов и массивов в переменные", "isCorrect": true },
+        { "id": 2, "text": "Удаление свойств из объекта", "isCorrect": false },
+        { "id": 3, "text": "Разрушение объекта на части", "isCorrect": false },
+        { "id": 4, "text": "Очистка памяти от неиспользуемых объектов", "isCorrect": false }
+      ]
+    },
+    {
+      "id": 13,
+      "text": "Какой метод используется для обработки ошибок в Promise?",
+      "hasOptions": true,
+      "options": [
+        { "id": 1, "text": "catch", "isCorrect": true },
+        { "id": 2, "text": "error", "isCorrect": false },
+        { "id": 3, "text": "fail", "isCorrect": false },
+        { "id": 4, "text": "then", "isCorrect": false }
+      ]
+    },
+    {
+      "id": 14,
+      "text": "Что такое IIFE?",
+      "hasOptions": true,
+      "options": [
+        { "id": 1, "text": "Немедленно вызываемое функциональное выражение", "isCorrect": true },
+        { "id": 2, "text": "Интерфейс для импорта модулей", "isCorrect": false },
+        { "id": 3, "text": "Способ объявления классов", "isCorrect": false },
+        { "id": 4, "text": "Метод итерации по объектам", "isCorrect": false }
+      ]
+    },
+    {
+      "id": 15,
+      "text": "Как добавить элемент в конец массива?",
+      "hasOptions": true,
+      "options": [
+        { "id": 1, "text": "array.push(element)", "isCorrect": true },
+        { "id": 2, "text": "array.append(element)", "isCorrect": false },
+        { "id": 3, "text": "array.add(element)", "isCorrect": false },
+        { "id": 4, "text": "array.concat(element)", "isCorrect": false }
+      ]
+    },
+    {
+      "id": 16,
+      "text": "Что такое this в JavaScript?",
+      "hasOptions": true,
+      "options": [
+        { "id": 1, "text": "Контекст выполнения функции", "isCorrect": true },
+        { "id": 2, "text": "Ссылка на текущий объект", "isCorrect": false },
+        { "id": 3, "text": "Глобальный объект", "isCorrect": false },
+        { "id": 4, "text": "Ключевое слово для классов", "isCorrect": false }
+      ]
+    },
+    {
+      "id": 17,
+      "text": "Как работает оператор остатка (%)?",
+      "hasOptions": true,
+      "options": [
+        { "id": 1, "text": "Возвращает остаток от деления", "isCorrect": true },
+        { "id": 2, "text": "Вычисляет процент от числа", "isCorrect": false },
+        { "id": 3, "text": "Округляет число", "isCorrect": false },
+        { "id": 4, "text": "Делит числа", "isCorrect": false }
+      ]
+    },
+    {
+      "id": 18,
+      "text": "Что такое стрелочные функции?",
+      "hasOptions": true,
+      "options": [
+        { "id": 1, "text": "Функции с укороченным синтаксисом и без своего this", "isCorrect": true },
+        { "id": 2, "text": "Функции для работы со стрелками", "isCorrect": false },
+        { "id": 3, "text": "Асинхронные функции", "isCorrect": false },
+        { "id": 4, "text": "Функции-конструкторы", "isCorrect": false }
+      ]
+    },
+    {
+      "id": 19,
+      "text": "Как проверить наличие свойства в объекте?",
+      "hasOptions": true,
+      "options": [
+        { "id": 1, "text": "'prop' in object", "isCorrect": true },
+        { "id": 2, "text": "object.hasProperty('prop')", "isCorrect": false },
+        { "id": 3, "text": "object.prop !== undefined", "isCorrect": true },
+        { "id": 4, "text": "object.contains('prop')", "isCorrect": false }
+      ]
+    },
+    {
+      "id": 20,
+      "text": "Что такое async/await?",
+      "hasOptions": true,
+      "options": [
+        { "id": 1, "text": "Синтаксический сахар для работы с Promise", "isCorrect": true },
+        { "id": 2, "text": "Способ объявления асинхронных переменных", "isCorrect": false },
+        { "id": 3, "text": "Метод для создания потоков", "isCorrect": false },
+        { "id": 4, "text": "Инструмент для измерения времени выполнения", "isCorrect": false }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,12 @@
+// TODO: 1. Сделать текстовый ответ на вопрос
+// TODO: 2. Сделать ответ на вопрос по кнопкам
+// TODO: 3. Сделать класс Randomizer
+// TODO: 4. Вынести данные в Redis / MongoDB
+// TODO: 5. Создать базу знаний для Junior Javascript
+
 import {Bot, Keyboard, InlineKeyboard, GrammyError, HttpError} from 'grammy';
-import {EnvironmentManager} from "./classes/EnvironmentManager";
+import EnvironmentManager from "./classes/EnvironmentManager.js";
+import {getRandomQuestion} from "./classes/Randomizer.js";
 
 //Configure Bot
 EnvironmentManager.getInstance();
@@ -34,8 +41,18 @@ bot.command("start", async (ctx) => {
 bot.hears(
     ["HTML", "CSS", "JavaScript", "React"],
     async (ctx) => {
+        const topic = ctx.message!.text;
+        const question = getRandomQuestion(topic!);
+
         const replyInlineKeyboard = new InlineKeyboard()
-            .text('Получить ответ', 'getAnswer')
+            .text(
+                'Получить ответ',
+                JSON.stringify({
+                    messageText: ctx.message!.text,
+                    question: question.answer,
+                    questionId: question.id
+                })
+            )
             .text('Отменить', 'cancel');
         await ctx.reply(
             `Что такое ${ctx.message!.text}?`,
@@ -43,6 +60,19 @@ bot.hears(
         );
     }
 );
+
+//On
+bot.on("callback_query:data", async (ctx) => {
+    if(ctx.callbackQuery.data === "cancel"){
+        await ctx.reply("Отмена");
+        await ctx.answerCallbackQuery();
+        return;
+    }
+
+    const callbackData = JSON.parse(ctx.callbackQuery.data);
+    await ctx.reply(`${callbackData.messageText} – это составляющая фронтенда.`);
+    await ctx.answerCallbackQuery();
+});
 
 //Errors
 bot.catch((botError) => {
