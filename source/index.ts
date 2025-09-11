@@ -1,9 +1,10 @@
 import {Bot, Keyboard, InlineKeyboard, GrammyError, HttpError} from 'grammy';
-import * as dotenv from 'dotenv';
+import {EnvironmentManager} from "./classes/EnvironmentManager";
 
 //Configure Bot
-dotenv.config();
-const bot = new Bot(process.env.BOT_TOKEN!); // "!" говорит, что значение точно есть
+EnvironmentManager.getInstance();
+const BOT_TOKEN = EnvironmentManager.getInstance().getVariable("BOT_TOKEN");
+const bot = new Bot(BOT_TOKEN); // "BOT_TOKEN!" - "!" говорит, что значение точно есть
 
 //Start Bot
 bot.start().then(r => r);

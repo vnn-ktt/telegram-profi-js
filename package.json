@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf distribution",
+    "clean:dev": "rimraf distribution/development",
+    "clean:prod": "rimraf distribution/product",
+    "build:dev": "yarn run clean:dev && cross-env NODE_ENV=development tsc -p tsconfig.dev.json",
+    "build:prod": "yarn run clean:prod && cross-env NODE_ENV=product tsc -p tsconfig.prod.json",
     "start:dev": "nodemon distribution/development/index.js",
     "start:prod": "nodemon distribution/product/index.js",
-    "build:dev": "tsc -p tsconfig.dev.json",
-    "build:prod": "tsc -p tsconfig.prod.json",
-    "develop":  "yarn run build:dev && yarn run start:dev",
-    "watch": "tsc -p tsconfig.dev.json --watch"
+    "develop": "yarn run build:dev && yarn run start:dev",
+    "deploy": "yarn run build:prod && yarn run start:prod",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -18,12 +21,18 @@
   "type": "module",
   "dependencies": {
     "dotenv": "^17.2.2",
+    "fs": "^0.0.1-security",
     "grammy": "^1.38.2",
     "nodemon": "^3.1.10",
+    "path": "^0.12.7",
     "tsconfig": "^7.0.0",
     "typescript": "^5.9.2"
   },
   "devDependencies": {
-    "@types/node": "^24.3.1"
+    "@types/node": "^24.3.1",
+    "cross-env": "^10.0.0",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "tslib": "^2.8.1"
   }
 }

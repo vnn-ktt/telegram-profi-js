@@ -1,2 +1,5 @@
+distribution
 node_modules
-.env
+source/config/.env.development
+source/config/.env.product
+source/config/.env
