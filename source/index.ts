@@ -4,26 +4,25 @@
 // TODO: 4. Вынести данные в Redis / MongoDB
 // TODO: 5. Создать базу знаний для Junior Javascript
 
-import {Bot, Keyboard, InlineKeyboard, GrammyError, HttpError} from 'grammy';
+import { Bot, Keyboard, InlineKeyboard, GrammyError, HttpError } from 'grammy';
 import EnvironmentManager from "./classes/EnvironmentManager.js";
-import {getRandomQuestion} from "./classes/Randomizer.js";
+import Question from "./classes/Question.js";
+import { EGrade } from "./types/questions";
 
-//Configure Bot
-EnvironmentManager.getInstance();
+//config app
 const BOT_TOKEN = EnvironmentManager.getInstance().getVariable("BOT_TOKEN");
 const bot = new Bot(BOT_TOKEN); // "BOT_TOKEN!" - "!" говорит, что значение точно есть
+const question = new Question();
 
-//Start Bot
+//start Bot
 bot.start().then(r => r);
 
-//Commands
+//commands
 bot.command("start", async (ctx) => {
     const startKeyboard = new Keyboard()
-        .text("HTML")
-        .text("CSS")
-        .row()
-        .text('JavaScript')
-        .text('React')
+        .text("Junior")
+        .text("Middle")
+        .text('Senior')
         .resized();
 
     await ctx.reply(
@@ -32,58 +31,76 @@ bot.command("start", async (ctx) => {
     );
 
     await ctx.reply(
-        "С чего начнём? Выбери тему вопроса в меню 👇",
+        "Выбери сложность вопроса в меню 👇",
         { reply_markup: startKeyboard }
     );
 })
 
-//Hears
+//hears
 bot.hears(
-    ["HTML", "CSS", "JavaScript", "React"],
+    [
+        EGrade.JUNIOR.toUpperCase(),
+        EGrade.MIDDLE.toUpperCase(),
+        EGrade.SENIOR.toUpperCase()
+    ],
     async (ctx) => {
-        const topic = ctx.message!.text;
-        const question = getRandomQuestion(topic!);
+        const grade = ctx.message!.text;
+        const data = question.getRandomQuestion(grade!);
+        let inlineKeyboard = new InlineKeyboard();
 
-        const replyInlineKeyboard = new InlineKeyboard()
-            .text(
-                'Получить ответ',
-                JSON.stringify({
-                    messageText: ctx.message!.text,
-                    question: question.answer,
-                    questionId: question.id
-                })
-            )
-            .text('Отменить', 'cancel');
+        // использование type guards упростит проверку типов для таких случаев
+        if (question.isClickQuestionType(data)) {
+            const buttonRows =
+                data.options.map(
+                    (option) => [
+                        InlineKeyboard
+                            .text(
+                                option.text!,
+                                JSON.stringify(
+                                    {
+                                        type: `${grade}-option`,
+                                        isCorrect: option.isCorrect,
+                                        questionId: data.id
+                                    }
+                                )
+                            )
+                    ]
+                );
+            inlineKeyboard = InlineKeyboard.from(buttonRows);
+        } else if (question.isAnswerQuestionType(data)) {
+           inlineKeyboard
+                .text(
+                    "Узнать ответ",
+                    JSON.stringify({
+                        messageText: ctx.message!.text,
+                        answer: data.answer,
+                        questionId: data.id
+                    })
+                )
+        }
         await ctx.reply(
-            `Что такое ${ctx.message!.text}?`,
-            { reply_markup: replyInlineKeyboard }
+            data.text,
+            { reply_markup: inlineKeyboard }
         );
     }
 );
 
-//On
+//on handlers
 bot.on("callback_query:data", async (ctx) => {
-    if(ctx.callbackQuery.data === "cancel"){
-        await ctx.reply("Отмена");
-        await ctx.answerCallbackQuery();
-        return;
-    }
-
     const callbackData = JSON.parse(ctx.callbackQuery.data);
-    await ctx.reply(`${callbackData.messageText} – это составляющая фронтенда.`);
-    await ctx.answerCallbackQuery();
+    //TODO: Доделать ответ на вопрос
 });
 
-//Errors
+//errors
 bot.catch((botError) => {
     const ctx = botError.ctx;
-    console.error(`Error while handling update ${ctx.update.update_id}:`);
+    console.error(`❌ Error while handling update ${ctx.update.update_id}:`);
     const error = botError.error;
     if (error instanceof GrammyError) {
-        console.error('Error in request:', error.description);
+        console.error('❌ Error in request:', error.description);
     } else if (error instanceof HttpError) {
-        console.error('Could not contact Telegram:', error);
+        console.error('❌ Could not contact Telegram:', error);
     } else {
-        console.error('Unknown error:', error);
+        console.error('❌ Unknown error:', error);
     }
 });

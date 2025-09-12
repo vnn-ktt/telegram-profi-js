@@ -1,5 +1,5 @@
 {
-  "javascript": [
+  "junior": [
     {
       "id": 1,
       "text": "Что выведет console.log(typeof null)?",
