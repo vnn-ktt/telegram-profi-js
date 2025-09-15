@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "ES2015", // использование import
+    "module": "ESNext", // использование import
     "moduleResolution": "node", // node.js ищет модули в node_modules и поддерживает расширения .ts
     "esModuleInterop": true, // позволяет импортировать CommonJS модули как ES модули
+    "allowSyntheticDefaultImports": true, //когда включен esModuleInterop
     "lib": ["ES2020"], // только стандартные ES2020 функции, без DOM
     "rootDir": "./source",
     "strict": true, // noImplicitAny, strictNullChecks, strictFunctionTypes

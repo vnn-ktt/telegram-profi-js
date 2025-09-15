@@ -1,11 +1,12 @@
-import { Random } from "random-js";
+import {Random} from "random-js";
 import {
-    TQuestionsByLevel,
+    EGrade,
+    EQuestionType,
     IQuestionAnswer,
     IQuestionClick,
-    EQuestionType
-} from "../types/questions";
-import data from '../database/questions';
+    TQuestionsByLevel
+} from "../types/questions.js";
+import data from '../database/questions.js';
 
 export default class Question {
     private readonly _data: TQuestionsByLevel;
@@ -21,7 +22,7 @@ export default class Question {
     ): IQuestionAnswer | IQuestionClick {
         const levelKey = level.toLowerCase() as keyof TQuestionsByLevel;
         if (!this._data[levelKey]) {
-            throw new Error(`⚠️ No questions found for level: ${level}`);
+            throw new Error(`❌ No questions found for level: ${level}`);
         }
         const randomQuestionIndex = this._random.integer(
             0,
@@ -42,8 +43,20 @@ export default class Question {
         return question.type === EQuestionType.ANSWER;
     }
 
-    public getQuestionsCount(level: string) : number {
+    public getQuestionsCountByLevel(level: string = EGrade.JUNIOR) : number {
         const levelKey = level.toLowerCase() as keyof TQuestionsByLevel;
         return this._data[levelKey]?.length;
+    }
+
+    public getQuestionAnswer(level: string, questionId: number): string {
+        const levelKey = level.toLowerCase() as keyof TQuestionsByLevel;
+        const question = this._data[levelKey][questionId];
+        if (this.isAnswerQuestionType(question)) {
+            return question.answer;
+        } else if (this.isClickQuestionType(question)) {
+            return question.options.find(option => option.isCorrect)!.text;
+        } else {
+            throw new Error('❌ No questions found for level: ' + level);
+        }
     }
 }

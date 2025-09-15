@@ -17,9 +17,9 @@ export interface IQuestionAnswer {
     answer: string;
 }
 
-interface IQuestionOption {
+export interface IQuestionOption {
     id: number,
-    text: string | null,
+    text: string,
     isCorrect: boolean
 }
 
