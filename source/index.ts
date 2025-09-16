@@ -3,14 +3,15 @@
 
 import { Bot, Keyboard, InlineKeyboard, GrammyError, HttpError } from 'grammy';
 import EnvironmentManager from "./classes/EnvironmentManager.js";
-import Question from "./classes/Question.js";
-import { EGrade, EQuestionType } from "./types/questions.js";
+import QuestionManager from "./classes/QuestionManager.js";
+import { EGrade } from "./types/questions.js";
 import * as utils from "./utils/utils.js";
+import {IOptionData, IAnswerData} from "./types/replies.js";
 
 //config app
 const BOT_TOKEN = EnvironmentManager.getInstance().getVariable("BOT_TOKEN");
 const bot = new Bot(BOT_TOKEN); // "BOT_TOKEN!" - "!" говорит, что значение точно есть
-const question = new Question();
+const questionManager = new QuestionManager();
 
 //start Bot
 bot.start().then(r => r);
@@ -29,7 +30,7 @@ bot.command("start", async (ctx) => {
     );
 
     await ctx.reply(
-        "Сейчас в базе данных бота " + question.getQuestionsCountByLevel() + " вопросов!"
+        "Сейчас в базе данных бота " + questionManager.getQuestionsCountByGrade() + " вопросов!"
     );
 
     await ctx.reply(
@@ -46,36 +47,36 @@ bot.hears(
         utils.capitalize(EGrade.SENIOR)
     ],
     async (ctx) => {
-        const grade = ctx.message!.text;
-        const data = question.getRandomQuestion(grade!);
+        const grade = ctx.message!.text! as keyof typeof EGrade;
+        const questionData = questionManager.getRandomQuestion(grade!);
         let inlineKeyboard = new InlineKeyboard();
 
         // использование type guards упростит проверку типов для таких случаев
-        if (question.isClickQuestionType(data)) {
-            data.options.forEach(option => {
+        if (questionManager.isClickQuestionType(questionData)) {
+            questionData.options.forEach(option => {
+                console.log(option);
+                const data: IOptionData = {
+                    grade: grade,
+                    questionId: questionData.id,
+                    isCorrect: option.isCorrect
+                };
                inlineKeyboard.text(
                    option.text!,
-                   JSON.stringify({
-                       level: grade,
-                       questionId: data.id,
-                       type: data.type,
-                       isCorrect: option.isCorrect
-                   })
+                   JSON.stringify(data)
                ).row();
             });
-        } else if (question.isAnswerQuestionType(data)) {
+        } else if (questionManager.isAnswerQuestionType(questionData)) {
+            const data: IAnswerData = {
+                grade: grade,
+                questionId: questionData.id
+            };
            inlineKeyboard.text(
                 "Узнать ответ",
-                JSON.stringify({
-                    level: grade,
-                    questionId: data.id,
-                    type: data.type,
-                    answer: data.answer
-                })
+               JSON.stringify(data)
            );
         }
         await ctx.reply(
-            data.text,
+            questionData.text,
             { reply_markup: inlineKeyboard }
         );
     }
@@ -84,21 +85,23 @@ bot.hears(
 //on handlers
 bot.on("callback_query:data", async (ctx) => {
     try {
-        const callbackData = JSON.parse(ctx.callbackQuery.data);
-        if (callbackData.type === EQuestionType.CLICK) {
-            if (callbackData.isCorrect) {
+        const {grade, questionId, ...rest} = JSON.parse(ctx.callbackQuery.data);
+        const questionData = questionManager.getQuestionById(grade, questionId);
+
+        if (questionManager.isClickQuestionType(questionData)) {
+            if (!rest.isCorrect) {
                 await ctx.reply("Вы ответили неверно ❌");
                 await ctx.reply(
                     "Правильный ответ:\n" +
-                    question.getQuestionAnswer(callbackData.level, callbackData.questionId),
+                    questionManager.getQuestionAnswer(grade, questionId),
                     { parse_mode: 'HTML' }
                 );
-            } else if (!callbackData.isCorrect) {
+            } else if (rest.isCorrect) {
                 await ctx.reply("Вы ответили верно ✅");
             }
-        } else if (callbackData.type === EQuestionType.ANSWER) {
+        } else if (questionManager.isAnswerQuestionType(questionData)) {
             await ctx.reply(
-                question.getQuestionAnswer(callbackData.level, callbackData.questionId),
+                questionManager.getQuestionAnswer(grade, questionId),
                 { parse_mode: 'HTML' }
             );
         }

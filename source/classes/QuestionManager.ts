@@ -4,12 +4,13 @@ import {
     EQuestionType,
     IQuestionAnswer,
     IQuestionClick,
-    TQuestionsByLevel
+    TQuestionsByGrade,
+    TQuestion
 } from "../types/questions.js";
 import data from '../database/questions.js';
 
-export default class Question {
-    private readonly _data: TQuestionsByLevel;
+export default class QuestionManager {
+    private readonly _data: TQuestionsByGrade;
     private readonly _random: Random;
 
     constructor (){
@@ -18,17 +19,17 @@ export default class Question {
     }
 
     public getRandomQuestion(
-        level: string
+        grade: string
     ): IQuestionAnswer | IQuestionClick {
-        const levelKey = level.toLowerCase() as keyof TQuestionsByLevel;
-        if (!this._data[levelKey]) {
-            throw new Error(`❌ No questions found for level: ${level}`);
+        const gradeKey = grade.toLowerCase() as keyof TQuestionsByGrade;
+        if (!this._data[gradeKey]) {
+            throw new Error(`❌ No questions found for grade: ${grade}`);
         }
         const randomQuestionIndex = this._random.integer(
             0,
-            data[levelKey].length - 1
+            data[gradeKey].length - 1
         );
-        return data[levelKey][randomQuestionIndex];
+        return data[gradeKey][randomQuestionIndex];
     }
 
     public isClickQuestionType(
@@ -43,20 +44,26 @@ export default class Question {
         return question.type === EQuestionType.ANSWER;
     }
 
-    public getQuestionsCountByLevel(level: string = EGrade.JUNIOR) : number {
-        const levelKey = level.toLowerCase() as keyof TQuestionsByLevel;
-        return this._data[levelKey]?.length;
+    public getQuestionsCountByGrade(grade: string = EGrade.JUNIOR) : number {
+        const gradeKey = grade.toLowerCase() as keyof TQuestionsByGrade;
+        return this._data[gradeKey]?.length;
     }
 
-    public getQuestionAnswer(level: string, questionId: number): string {
-        const levelKey = level.toLowerCase() as keyof TQuestionsByLevel;
-        const question = this._data[levelKey][questionId];
+    public getQuestionAnswer(grade: string = EGrade.JUNIOR, questionId: number): string {
+        const gradeKey = grade.toLowerCase() as keyof TQuestionsByGrade;
+        const question = this._data[gradeKey][questionId];
         if (this.isAnswerQuestionType(question)) {
             return question.answer;
         } else if (this.isClickQuestionType(question)) {
             return question.options.find(option => option.isCorrect)!.text;
         } else {
-            throw new Error('❌ No questions found for level: ' + level);
+            throw new Error('❌ No questions found for grade: ' + grade);
         }
+    }
+
+    public getQuestionById(grade: string = EGrade.JUNIOR, id: number): TQuestion {
+        const gradeKey = grade.toLowerCase() as keyof TQuestionsByGrade;
+
+        return this._data[gradeKey][id];
     }
 }

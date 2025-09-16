@@ -1,13 +1,12 @@
-import { EQuestionType } from "./questions";
+import { EGrade } from "./questions.js";
 
-export interface IAnswerReply {
+export interface IAnswerData {
+    grade: keyof typeof EGrade;
     questionId: number;
-    type: EQuestionType.ANSWER;
-    answer: string;
 }
 
-export interface IOptionReply {
+export interface IOptionData {
+    grade: keyof typeof EGrade;
     questionId: number;
-    type: EQuestionType.CLICK;
     isCorrect: boolean;
 }

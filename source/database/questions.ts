@@ -1,6 +1,6 @@
-import {EQuestionType, TQuestionsByLevel} from "../types/questions.js";
+import {EQuestionType, TQuestionsByGrade} from "../types/questions.js";
 
-const data : TQuestionsByLevel = {
+const data : TQuestionsByGrade = {
     "junior": [
         {
             "id": 1,

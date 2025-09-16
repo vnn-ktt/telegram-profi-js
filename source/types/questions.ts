@@ -31,6 +31,6 @@ export interface IQuestionClick {
     options: IQuestionOption[]
 }
 
-type TQuestion = IQuestionAnswer | IQuestionClick;
+export type TQuestion = IQuestionAnswer | IQuestionClick;
 
-export type TQuestionsByLevel = Record<EGrade, TQuestion[]>;
+export type TQuestionsByGrade = Record<EGrade, TQuestion[]>;

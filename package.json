@@ -20,6 +20,7 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "date-fns": "^4.1.0",
     "dotenv": "^17.2.2",
     "fs": "^0.0.1-security",
     "grammy": "^1.38.2",
