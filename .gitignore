@@ -3,3 +3,4 @@ node_modules
 source/config/.env.development
 source/config/.env.product
 source/config/.env
+source/logs
