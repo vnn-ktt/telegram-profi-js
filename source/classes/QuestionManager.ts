@@ -51,7 +51,7 @@ export default class QuestionManager {
 
     public getQuestionAnswer(grade: string = EGrade.JUNIOR, questionId: number): string {
         const gradeKey = grade.toLowerCase() as keyof TQuestionsByGrade;
-        const question = this._data[gradeKey][questionId];
+        const question = this._data[gradeKey].find(quest => quest.id === questionId)!;
         if (this.isAnswerQuestionType(question)) {
             return question.answer;
         } else if (this.isClickQuestionType(question)) {
@@ -63,7 +63,6 @@ export default class QuestionManager {
 
     public getQuestionById(grade: string = EGrade.JUNIOR, id: number): TQuestion {
         const gradeKey = grade.toLowerCase() as keyof TQuestionsByGrade;
-
         return this._data[gradeKey][id];
     }
 }
