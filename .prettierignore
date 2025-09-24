@@ -1,0 +1,4 @@
+node_modules/
+distribution/
+package.json
+*.min.js
