@@ -1,7 +1,32 @@
 import * as winston from "winston";
 import * as path from "path";
 import "winston-daily-rotate-file";
-import { LogLevel, BotLogContext } from "../types/logger.js";
+
+interface LogError {
+  message: string;
+  stack?: string;
+  name: string;
+}
+
+interface LogMetadata {
+  error?: LogError | unknown;
+  [key: string]: unknown;
+}
+
+enum LogLevel {
+  ERROR = "error",
+  INFO = "info",
+  WARNING = "warning",
+  DEBUG = "debug",
+}
+
+interface BotLogContext {
+  userId?: number;
+  chatId?: number;
+  messageId?: number;
+  questionId?: number;
+  grade?: string;
+}
 
 /**
  * Менеджер логирования для приложения на основе Winston.
@@ -73,7 +98,7 @@ export default class LogManager {
           datePattern: "YYYY-MM-DD",
           maxSize: "10m",
           maxFiles: "30d",
-          level: LogLevel.INFO && LogLevel.WARNING,
+          level: LogLevel.INFO,
         }),
         new winston.transports.DailyRotateFile({
           filename: path.resolve(logDir, "error-%DATE%.log"),
@@ -111,9 +136,6 @@ export default class LogManager {
     process.on("uncaughtException", (error) => {
       this.error("uncaughtException", error);
       process.exit(1);
-    });
-    process.on("unhandledRejection", (reason, promise) => {
-      this.error("unhandledRejection", { reason, promise });
     });
   }
 
@@ -174,12 +196,15 @@ export default class LogManager {
   /**
    * Подготовка метаданных для логирования ошибок
    * @private
-   * @param {Error | any} [error] - Объект ошибки
+   * @param {Error | unknown} [error] - Объект ошибки
    * @param {BotLogContext} [context] - Контекст логирования
-   * @returns {any} Объект с подготовленными метаданными
+   * @returns {LogMetadata} Объект с подготовленными метаданными
    */
-  private _prepareMetadata(error?: Error, context?: BotLogContext): any {
-    const metadata: any = { ...context };
+  private _prepareMetadata(
+    error?: Error | unknown,
+    context?: BotLogContext
+  ): LogMetadata {
+    const metadata: LogMetadata = { ...context };
     if (error instanceof Error) {
       metadata.error = {
         message: error.message,

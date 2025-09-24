@@ -1,17 +1,18 @@
 export enum EGrade {
-  JUNIOR = "junior",
-  MIDDLE = "middle",
-  SENIOR = "senior",
+  JUNIOR = "JUNIOR",
+  MIDDLE = "MIDDLE",
+  SENIOR = "SENIOR",
 }
 
 export enum EQuestionType {
-  CLICK = "click",
-  ANSWER = "answer",
+  CLICK = "CLICK",
+  ANSWER = "ANSWER",
 }
 
 export interface IQuestionAnswer {
   id: number;
   type: EQuestionType.ANSWER;
+  grade: EGrade;
   text: string;
   hasOptions: boolean;
   answer: string;
@@ -26,6 +27,7 @@ export interface IQuestionOption {
 export interface IQuestionClick {
   id: number;
   type: EQuestionType.CLICK;
+  grade: EGrade;
   text: string;
   hasOptions: boolean;
   options: IQuestionOption[];

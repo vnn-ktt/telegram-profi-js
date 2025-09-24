@@ -113,4 +113,16 @@ export default class EnvironmentManager {
   public hasVariable(key: string): boolean {
     return !!process.env[key];
   }
+
+  /**
+   * Проверка режима окружения
+   * @public
+   * @returns {string} режим, в котором работает окружение
+   * @example
+   * if (envManager.getEnvironmentMode() === "development")
+   * // работаем в режиме разработки
+   */
+  public getEnvironmentMode(): string {
+    return process.env.NODE_ENV ?? "development";
+  }
 }

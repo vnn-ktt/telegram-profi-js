@@ -1,7 +1,3 @@
-// TODO: 1. Вынести данные в MongoDB
-// TODO: 2. Создать базу знаний для Junior Javascript
-// TODO: 3. Добавить prettier + eslint
-
 import { Bot, Keyboard, InlineKeyboard, GrammyError, HttpError } from "grammy";
 import EnvironmentManager from "./classes/EnvironmentManager.js";
 import QuestionManager from "./classes/QuestionManager.js";
