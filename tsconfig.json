@@ -11,7 +11,7 @@
     "forceConsistentCasingInFileNames": true, // для кроссплатформенной совместимости (Windows vs Linux)
     "resolveJsonModule": true, // позволяет импортировать JSON файлы как модули
     "declaration": true, // генерирует .d.ts файлы (для библиотек)
-    "skipLibCheck": true, // пропускает проверку типов в файлах .d.ts (декларациях)
+    "skipLibCheck": true // пропускает проверку типов в файлах .d.ts (декларациях)
   },
   "include": ["source/**/*"],
   "exclude": ["node_modules", "distribution"]

@@ -16,8 +16,16 @@
       "text": "Что такое hoisting в JavaScript?",
       "hasOptions": true,
       "options": [
-        { "id": 1, "text": "Поднятие переменных и функций в начало области видимости", "isCorrect": true },
-        { "id": 2, "text": "Оптимизация кода движком JavaScript", "isCorrect": false },
+        {
+          "id": 1,
+          "text": "Поднятие переменных и функций в начало области видимости",
+          "isCorrect": true
+        },
+        {
+          "id": 2,
+          "text": "Оптимизация кода движком JavaScript",
+          "isCorrect": false
+        },
         { "id": 3, "text": "Сборка мусора", "isCorrect": false },
         { "id": 4, "text": "Асинхронное выполнение кода", "isCorrect": false }
       ]
@@ -38,10 +46,18 @@
       "text": "Что такое замыкание (closure) в JavaScript?",
       "hasOptions": true,
       "options": [
-        { "id": 1, "text": "Функция вместе с лексическим окружением", "isCorrect": true },
+        {
+          "id": 1,
+          "text": "Функция вместе с лексическим окружением",
+          "isCorrect": true
+        },
         { "id": 2, "text": "Способ скрытия переменных", "isCorrect": false },
         { "id": 3, "text": "Метод оптимизации памяти", "isCorrect": false },
-        { "id": 4, "text": "Тип данных для хранения функций", "isCorrect": false }
+        {
+          "id": 4,
+          "text": "Тип данных для хранения функций",
+          "isCorrect": false
+        }
       ]
     },
     {
@@ -60,10 +76,18 @@
       "text": "Что такое Promise в JavaScript?",
       "hasOptions": true,
       "options": [
-        { "id": 1, "text": "Объект для работы с асинхронными операциями", "isCorrect": true },
+        {
+          "id": 1,
+          "text": "Объект для работы с асинхронными операциями",
+          "isCorrect": true
+        },
         { "id": 2, "text": "Способ объявления переменных", "isCorrect": false },
         { "id": 3, "text": "Метод для создания классов", "isCorrect": false },
-        { "id": 4, "text": "Тип данных для хранения промокодов", "isCorrect": false }
+        {
+          "id": 4,
+          "text": "Тип данных для хранения промокодов",
+          "isCorrect": false
+        }
       ]
     },
     {
@@ -104,9 +128,21 @@
       "text": "Что такое event bubbling?",
       "hasOptions": true,
       "options": [
-        { "id": 1, "text": "Всплытие события от целевого элемента к document", "isCorrect": true },
-        { "id": 2, "text": "Погружение события от document к целевому элементу", "isCorrect": false },
-        { "id": 3, "text": "Создание пользовательских событий", "isCorrect": false },
+        {
+          "id": 1,
+          "text": "Всплытие события от целевого элемента к document",
+          "isCorrect": true
+        },
+        {
+          "id": 2,
+          "text": "Погружение события от document к целевому элементу",
+          "isCorrect": false
+        },
+        {
+          "id": 3,
+          "text": "Создание пользовательских событий",
+          "isCorrect": false
+        },
         { "id": 4, "text": "Обработка ошибок в событиях", "isCorrect": false }
       ]
     },
@@ -116,7 +152,11 @@
       "hasOptions": true,
       "options": [
         { "id": 1, "text": "Object.copy(obj)", "isCorrect": false },
-        { "id": 2, "text": "JSON.parse(JSON.stringify(obj))", "isCorrect": true },
+        {
+          "id": 2,
+          "text": "JSON.parse(JSON.stringify(obj))",
+          "isCorrect": true
+        },
         { "id": 3, "text": "obj.clone()", "isCorrect": false },
         { "id": 4, "text": "Object.assign(obj)", "isCorrect": false }
       ]
@@ -126,10 +166,18 @@
       "text": "Что такое деструктуризация?",
       "hasOptions": true,
       "options": [
-        { "id": 1, "text": "Извлечение значений из объектов и массивов в переменные", "isCorrect": true },
+        {
+          "id": 1,
+          "text": "Извлечение значений из объектов и массивов в переменные",
+          "isCorrect": true
+        },
         { "id": 2, "text": "Удаление свойств из объекта", "isCorrect": false },
         { "id": 3, "text": "Разрушение объекта на части", "isCorrect": false },
-        { "id": 4, "text": "Очистка памяти от неиспользуемых объектов", "isCorrect": false }
+        {
+          "id": 4,
+          "text": "Очистка памяти от неиспользуемых объектов",
+          "isCorrect": false
+        }
       ]
     },
     {
@@ -148,8 +196,16 @@
       "text": "Что такое IIFE?",
       "hasOptions": true,
       "options": [
-        { "id": 1, "text": "Немедленно вызываемое функциональное выражение", "isCorrect": true },
-        { "id": 2, "text": "Интерфейс для импорта модулей", "isCorrect": false },
+        {
+          "id": 1,
+          "text": "Немедленно вызываемое функциональное выражение",
+          "isCorrect": true
+        },
+        {
+          "id": 2,
+          "text": "Интерфейс для импорта модулей",
+          "isCorrect": false
+        },
         { "id": 3, "text": "Способ объявления классов", "isCorrect": false },
         { "id": 4, "text": "Метод итерации по объектам", "isCorrect": false }
       ]
@@ -192,8 +248,16 @@
       "text": "Что такое стрелочные функции?",
       "hasOptions": true,
       "options": [
-        { "id": 1, "text": "Функции с укороченным синтаксисом и без своего this", "isCorrect": true },
-        { "id": 2, "text": "Функции для работы со стрелками", "isCorrect": false },
+        {
+          "id": 1,
+          "text": "Функции с укороченным синтаксисом и без своего this",
+          "isCorrect": true
+        },
+        {
+          "id": 2,
+          "text": "Функции для работы со стрелками",
+          "isCorrect": false
+        },
         { "id": 3, "text": "Асинхронные функции", "isCorrect": false },
         { "id": 4, "text": "Функции-конструкторы", "isCorrect": false }
       ]
@@ -214,10 +278,22 @@
       "text": "Что такое async/await?",
       "hasOptions": true,
       "options": [
-        { "id": 1, "text": "Синтаксический сахар для работы с Promise", "isCorrect": true },
-        { "id": 2, "text": "Способ объявления асинхронных переменных", "isCorrect": false },
+        {
+          "id": 1,
+          "text": "Синтаксический сахар для работы с Promise",
+          "isCorrect": true
+        },
+        {
+          "id": 2,
+          "text": "Способ объявления асинхронных переменных",
+          "isCorrect": false
+        },
         { "id": 3, "text": "Метод для создания потоков", "isCorrect": false },
-        { "id": 4, "text": "Инструмент для измерения времени выполнения", "isCorrect": false }
+        {
+          "id": 4,
+          "text": "Инструмент для измерения времени выполнения",
+          "isCorrect": false
+        }
       ]
     }
   ]
